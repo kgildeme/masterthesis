@@ -1,0 +1,49 @@
+hp_config:
+  model:
+    network:
+      input_dim: 132
+      output_dim: 2
+      hidden_dims: [128, 64, 64]
+    host:
+      n_layer: 1
+      head: null
+      embedding: null
+      d_model: 8
+      n_head: 8
+      dim_feedforward: 16
+      dropout: 0.1
+      max_len: 28
+    embedding:
+      n_layer: 1
+      head: 16
+      embedding: 768
+      d_model: 128
+      n_head: 32
+      dim_feedforward: 64
+      dropout: 0.1
+      max_len: 100
+    aggregation:
+      input_dim: 1826 # for original network: 15 + 8*28 + 100*16
+      output_dim: 2
+      hidden_dims: [256, 128, 128, 64]
+  epochs: 5
+  patience: 3
+  batch_size: 8
+  lr: 2.e-5
+  alpha: 0.1
+experiment:
+  id: DDoS
+  model_type: CIDS
+  seed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  device: [cuda:0, cuda:1, cuda:2]
+  gpus_per_trial: 0.33
+  cpus_per_trial: 3
+dataset:
+  ds_name: SCVIC
+  random_state: 1
+  num_workers: 2
+  network_data: true
+  host_data: true
+  host_embeddings: true
+  exclude: ['DDOS-LOIC-HTTP', 'DDOS-LOIC-UDP', 'DDOS-HOIC']
+  batch_size: 8

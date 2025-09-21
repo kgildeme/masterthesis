@@ -1,0 +1,55 @@
+hp_config:
+  model:
+    input_dim: 1690
+    output_dim: 2
+    hidden_dims:
+      - [512]
+      - [256]
+      - [512, 256]
+      - [256, 128]
+      - [256, 64]
+      - [512, 256, 128]
+      - [512, 256, 64]
+      - [512, 256, 32]
+      - [256, 64, 32]
+      - [256, 64, 64]
+      - [512, 256, 128, 64]
+      - choice
+  epochs: 10
+  patience: 3
+  batch_size: 32
+  lr: [1.e-6, 1.e-3, loguniform]
+experiment:
+  id: MLP-OPTC-1
+  seed: 42
+  n_trials: 100
+  cpus_per_trial: 2
+  gpus_per_trial: 0.3
+dataset:
+  name: OpTC
+  train:
+    undersampling:
+      target_dist: 
+        0: 0.66
+        1: 0.34
+      seed: 12345
+      online: false
+    ds_name: cids-v5_201_eval-ff_train
+    parts: 8
+    window_size: 10
+    shuffle: true
+    eval_mode: true
+    stage: 5
+  eval:
+    undersampling:
+      target_dist: 
+        0: 0.66
+        1: 0.34
+      seed: 12345
+      online: false
+    ds_name: cids-v5_201_eval-ff_eval
+    parts: 8
+    window_size: 10
+    shuffle: false
+    eval_mode: true
+    stage: 5

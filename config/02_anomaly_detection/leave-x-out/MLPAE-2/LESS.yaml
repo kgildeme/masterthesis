@@ -1,0 +1,26 @@
+hp_config:
+  model:
+    input_dim: 356
+    output_dim: 8
+    hidden_dims:
+      - 128
+  epochs: 20
+  patience: 5
+  batch_size: 8
+  lr: 4.5e-4
+experiment:
+  id: LESS
+  model_type: MLPAE-2
+  seed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  device: [cuda:0, cuda:1, cuda:2]
+  gpus_per_trial: 0.33
+  cpus_per_trial: 3
+dataset:
+  ds_name: SCVIC
+  seed: 1
+  n_worker: 1
+  network_data: true
+  host_data: true
+  host_embeddings: false
+  exclude: ['Brute Force -Web', 'Brute Force -XSS', 'SQL Injection', 'Infiltration']
+  batch_size: 8

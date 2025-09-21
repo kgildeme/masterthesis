@@ -1,0 +1,18 @@
+hp_config:
+  model:
+    n_estimators: 200
+    max_features: sqrt
+    n_jobs: 4
+experiment:
+  id: BASE
+  model_type: RF
+  seed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  device: [cuda:0, cuda:1, cuda:2]
+  gpus_per_trial: 0
+  cpus_per_trial: 8
+dataset:
+  ds_name: SCVIC
+  random_state: 1
+  network_data: true
+  host_data: false
+  host_embeddings: false

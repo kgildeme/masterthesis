@@ -1,0 +1,8 @@
+data/*
+**/*.pyc
+memory_plots
+value
+logs/*
+models/*
+results/*
+plots

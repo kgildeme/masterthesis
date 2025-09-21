@@ -1,0 +1,74 @@
+hp_config:
+  model:
+    input_dim: 1670
+    output_dim: 5
+    hidden_dims:
+      - 128
+  epochs: 20
+  store_every: 3
+  batch_size: 32
+  lr: 2.17e-6
+  lr_factor: 0.5
+  gamma: 2.
+experiment:
+  id: SSL-FULL-ITER-811-1
+  model_type: MLPAE-811
+  loss_type: reciprocal
+  seed: [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]
+  device: [cuda:0, cuda:1, cuda:2]
+  gpus_per_trial: 0.3
+  cpus_per_trial: 3
+  model_path: models/03_semisupervision/unsupervised/OpTC/MLPAE-811/BASE-811-1/BASE-811-1-
+dataset:
+  ds_name: OpTC
+  n_worker: 1
+  unsupervised:
+    train:
+      ds_name: cids-v5_811_train-ff_train
+      parts: 8
+      window_size: 10
+      shuffle: true
+      only_benign: true
+      eval_mode: false
+      stage: 5
+    eval:
+      ds_name: cids-v5_811_train-ff_eval
+      parts: 8
+      window_size: 10
+      only_benign: false
+      shuffle: false
+      eval_mode: true
+      stage: 5
+  supervised:
+    train:
+      ds_name: cids-v5_811_train-ff_train--104-170-205-255-321-355-419-462
+      target_ratio: 0.5
+      parts: 4
+      window_size: 10
+      shuffle: true
+      stage: 5
+    eval:
+      ds_name: cids-v5_811_train-ff_eval--503-559-609
+      parts: 4
+      window_size: 10
+      shuffle: false
+      stage: 5
+      only_benign: false
+      eval_mode: true
+    test:
+      ds_name: cids-v5_811_eval-ff
+      parts: 16
+      window_size: 10
+      shuffle: false
+      stage: 4
+      only_benign: false
+      eval_mode: true
+    test_extern:
+      ds_name: cids-v5_811_eval-ff--benign_only--771-874-955
+      parts: 4
+      window_size: 10
+      shuffle: false
+      stage: 5
+      only_benign: false
+      eval_mode: true
+      

@@ -1,0 +1,38 @@
+hp_config:
+  model:
+    input_dim: 1690
+    output_dim: [5, 30, randint]
+    hidden_dims:
+      - [128]
+      - [256]
+      - [256, 128]
+      - [128, 64]
+      - choice
+  epochs: 10
+  patience: 5
+  batch_size: 32
+  lr: [1.e-7, 1.e-3, loguniform]
+experiment:
+  id: MLPAE-OPTC-1
+  seed: 42
+  n_trials: 100
+  cpus_per_trial: 3
+  gpus_per_trial: 0.2
+dataset:
+  name: OPTCFull
+  n_worker: 2
+  train:
+    ds_name: cids-v5_201_train-ff
+    parts: 16
+    window_size: 10
+    shuffle: true
+    eval_mode: false
+    stage: 4
+  eval:
+    ds_name: cids-v5_201_eval-ff
+    parts: 16
+    window_size: 10
+    shuffle: false
+    eval_mode: true
+    only_benign: false
+    stage: 4

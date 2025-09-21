@@ -1,0 +1,24 @@
+hp_config:
+  model:
+    input_dim: 132
+    output_dim: 2
+    hidden_dims: [128, 128, 64]
+  epochs: 30
+  patience: 5
+  lr: 2.e-5
+experiment:
+  id: BASE
+  model_type: MLP
+  seed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  device: [cuda:0, cuda:1, cuda:2]
+  gpus_per_trial: 0.25
+  cpus_per_trial: 3
+dataset:
+  ds_name: SCVIC
+  random_state: 1
+  num_workers: 2
+  network_data: true
+  host_data: false
+  host_embeddings: false
+  batch_size: 8
+

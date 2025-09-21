@@ -1,0 +1,61 @@
+hp_config:
+  model:
+    input_dim: 1720
+    output_dim: 5
+    hidden_dims:
+      - 128
+  epochs: 10
+  patience: 5
+  batch_size: 32
+  lr: 2.17e-6
+experiment:
+  id: BASE-402-1
+  model_type: MLPAE-402
+  seed: [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]
+  device: [cuda:0, cuda:1, cuda:2]
+  gpus_per_trial: 0.5
+  cpus_per_trial: 3
+dataset:
+  ds_name: OpTC
+  n_worker: 1
+  unsupervised:
+    train:
+      ds_name: cids-v5_402_train-ff_train
+      parts: 8
+      window_size: 10
+      shuffle: true
+      only_benign: true
+      eval_mode: false
+      stage: 5
+    eval:
+      ds_name: cids-v5_402_train-ff_eval
+      parts: 8
+      window_size: 10
+      only_benign: false
+      shuffle: false
+      eval_mode: true
+      stage: 5
+  supervised:
+    train:
+      ds_name: cids-v5_402_train-ff_train--104-170-205-255-321-355-419-462
+      target_ratio: 0.5
+      parts: 4
+      window_size: 10
+      shuffle: true
+      stage: 5
+    eval:
+      ds_name: cids-v5_402_train-ff_eval--503-559-609
+      parts: 4
+      window_size: 10
+      shuffle: false
+      stage: 5
+      only_benign: false
+      eval_mode: true
+    test:
+      ds_name: cids-v5_402_eval-ff
+      parts: 16
+      window_size: 10
+      shuffle: false
+      stage: 4
+      only_benign: false
+      eval_mode: true

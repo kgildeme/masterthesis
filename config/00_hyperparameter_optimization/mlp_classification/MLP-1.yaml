@@ -1,0 +1,32 @@
+hp_config:
+  model:
+    input_dim: 356
+    output_dim: 15
+    hidden_dims:
+      - [256]
+      - [128]
+      - [256, 128]
+      - [128, 64]
+      - [256, 128, 64]
+      - [256, 128, 128]
+      - [128, 64, 32]
+      - [128, 128, 64]
+      - [128, 64, 64]
+  epochs: 60
+  patience: 5
+  batch_size: 8
+  lr: [1.e-6, 1.e-3, loguniform]
+experiment:
+  id: MLP-1
+  seed: 42
+  n_trials: 100
+  cpus_per_trial: 4
+  gpus_per_trial: 0.2
+dataset:
+  ds_name: SCVIC
+  seed: 1
+  n_worker: 2
+  network_data: true
+  host_data: true
+  host_embeddings: false
+

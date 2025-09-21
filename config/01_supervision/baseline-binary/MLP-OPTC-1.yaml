@@ -1,0 +1,46 @@
+hp_config:
+  model:
+    input_dim: 1690
+    output_dim: 2
+    hidden_dims: [512, 256]
+  epochs: 10
+  patience: 3
+  batch_size: 32
+  lr: 1.e-4
+experiment:
+  id: MLP-OPTC-1
+  model_type: MLP
+  seed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  device: [cuda:0, cuda:1, cuda:2]
+  gpus_per_trial: 0.25
+  cpus_per_trial: 3
+dataset:
+  name: OpTC
+  train:
+    undersampling:
+      target_dist: 
+        0: 0.66
+        1: 0.34
+      seed: 12345
+      online: false
+    ds_name: cids-v5_201_eval-ff_train--104-170-205-255-321-355-419-462
+    parts: 4
+    only_benign: false
+    window_size: 10
+    shuffle: true
+    eval_mode: true
+    stage: 5
+  eval:
+    undersampling:
+      target_dist: 
+        0: 0.66
+        1: 0.34
+      seed: 12345
+      online: false
+    ds_name: cids-v5_201_eval-ff_eval--503-559-609
+    parts: 4
+    only_benign: false
+    window_size: 10
+    shuffle: false
+    eval_mode: true
+    stage: 5
